@@ -11,7 +11,7 @@ arbitrary swappable models in your own reusable apps.
 
 Suppose your reusable app has two related tables:
 
-```
+```python
 from django.db import models
 class Parent(models.Model):
     name = models.TextField()
@@ -69,7 +69,7 @@ class BaseChild(models.Model):
         abstract = True
 
 class Child(BaseChild):
-    # default (swappable) impelmentation ...
+    # default (swappable) implementation ...
     class Meta:
        swappable = swappable_setting('reusableapp', 'BaseChild')
 ```

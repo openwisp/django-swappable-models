@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 
 _prefixes = {}
@@ -50,8 +51,8 @@ def get_model_names(app_label, models):
 def load_model(app_label, model, orm=None, required=True):
     """
     Load the specified model class, or the class it was swapped out for.
-    If a South orm object is provided, it will be used (but only for the
-    default model.)
+    If a South orm object is provided, it will be used (but only if the
+    model hasn't been swapped.)
     """
     swapped = is_swapped(app_label, model)
     if swapped:
