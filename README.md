@@ -71,7 +71,7 @@ class BaseChild(models.Model):
 class Child(BaseChild):
     # default (swappable) implementation ...
     class Meta:
-       swappable = swappable_setting('reusableapp', 'BaseChild')
+       swappable = swappable_setting('reusableapp', 'Child')
 ```
 
 Then the user can override one or both models in their own app:
