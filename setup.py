@@ -33,7 +33,7 @@ def parse_markdown_readme():
 
 setup(
     name='swapper',
-    version='0.1.0',
+    version='0.1.1',
     author='S. Andrew Sheppard',
     author_email='andrew@wq.io',
     url='https://github.com/wq/django-swappable-models',
@@ -47,6 +47,8 @@ setup(
         'Environment :: Web Environment',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
+        'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.3',
     ],
 )
