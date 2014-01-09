@@ -91,6 +91,7 @@ REUSABLEAPP_PARENT_MODEL = "myapp.Parent"
 ```
 
 Note: Instead of importing concrete models directly, always use the swapper:
+
 ```python
 # reusableapp/views.py
 
