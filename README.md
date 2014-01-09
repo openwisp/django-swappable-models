@@ -3,7 +3,7 @@ Swapper
 
 #### Django Swappable Models - No longer only for auth.User!
 
-Swapper is an unofficial API for the undocumented but very powerful Django 
+Swapper is an unofficial API for the [undocumented] but very powerful Django 
 feature: swappable models.  Swapper facilitates implementing
 arbitrary swappable models in your own reusable apps.
 
@@ -33,8 +33,8 @@ would either need to:
  3. Use swappable models, together with `ForeignKeys` that read the swappable
     settings.
 
-This third approach is taken by Django to facilitate swapping of the auth User
-model.  Swapper extends this approach to apply to any model.
+This third approach is taken by Django to facilitate [swapping the auth.User
+model].  Swapper extends this approach to apply to any model.
 
 ## Getting Started
 
@@ -104,3 +104,14 @@ Child = load_model("reusableapp", "Parent")
 def view(request, *args, **kwargs):
     qs = Parent.objects.all()
     # ...
+```
+
+## Real-World Example
+Swapper is used extensively in [wq.db], particularly in the [vera] submodule, which has no less than [7 inter-related models], each of which can be swapped out for custom implementations.  (Swapper actually started out as part of [wq.db.patterns], but was extracted for more general-purpose use.)
+
+[undocumented]: https://code.djangoproject.com/ticket/19103
+[swapping the auth.User model]: https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user
+[wq.db]: http://wq.io/wq.db
+[vera]: http://wq.io/vera
+[wq.db.patterns]: http://wq.io/docs/about-patterns
+[7 inter-related models]: https://github.com/wq/wq.db/blob/master/contrib/vera/models.py
