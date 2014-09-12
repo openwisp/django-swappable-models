@@ -10,10 +10,16 @@ def swappable_setting(app_label, model):
     Returns the setting name to use for the given model (i.e. AUTH_USER_MODEL)
     """
     prefix = _prefixes.get(app_label, app_label)
-    return "{prefix}_{model}_MODEL".format(
+    setting = "{prefix}_{model}_MODEL".format(
         prefix=prefix.upper(),
         model=model.upper()
     )
+
+    # Ensure this attribute exists to avoid migration issues in Django 1.7
+    if not hasattr(settings, setting):
+        setattr(settings, setting, join(app_label, model))
+
+    return setting
 
 
 def is_swapped(app_label, model):
@@ -21,7 +27,7 @@ def is_swapped(app_label, model):
     Returns the value of the swapped setting, or False if the model hasn't
     been swapped.
     """
-    default_model = "%s.%s" % (app_label, model)
+    default_model = join(app_label, model)
     setting = swappable_setting(app_label, model)
     value = getattr(settings, setting, default_model)
     if value != default_model:
@@ -36,6 +42,15 @@ def get_model_name(app_label, model):
     returns the swappable setting value.
     """
     return is_swapped(app_label, model) or join(app_label, model)
+
+
+def dependency(app_label, model):
+    """
+    Returns a Django 1.7+ style dependency tuple for inclusion in
+    migration.dependencies[]
+    """
+    from django.db.migrations import swappable_dependency
+    return swappable_dependency(get_model_name(app_label, model))
 
 
 def get_model_names(app_label, models):
