@@ -7,6 +7,10 @@ Swapper is an unofficial API for the [undocumented] but very powerful Django
 feature: swappable models.  Swapper facilitates implementing
 arbitrary swappable models in your own reusable apps.
 
+[![Build Status](https://travis-ci.org/wq/django-swappable-models.svg?branch=master)](https://travis-ci.org/wq/django-swappable-models)
+
+Tested on Python 2.7 and 3.4, with Django 1.6 and 1.7.
+
 ## Example Use Case
 
 Suppose your reusable app has two related tables:
