@@ -77,7 +77,11 @@ def load_model(app_label, model, orm=None, required=True):
             return orm[join(app_label, model)]
 
     from django.db.models import get_model
-    cls = get_model(app_label, model)
+    try:
+        cls = get_model(app_label, model)
+    except LookupError:
+        cls = None
+
     if cls is None and required:
         raise ImproperlyConfigured(
             "Could not find {name}!".format(name=join(app_label, model))

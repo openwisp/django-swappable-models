@@ -2,6 +2,7 @@ from django.test import TestCase
 import unittest
 import swapper
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 try:
     from django.db import migrations
@@ -35,6 +36,12 @@ class SwapperTestCase(TestCase):
 
         item = Item.objects.all()[0]
         self.assertEqual(item.type.name, "Type 1")
+
+    def test_not_installed(self):
+        Invalid = swapper.load_model("invalid_app", "Invalid", required=False)
+        self.assertIsNone(Invalid)
+        with self.assertRaises(ImproperlyConfigured):
+            swapper.load_model("invalid_app", "Invalid", required=True)
 
     # Tests that only work if default_app.Type is swapped
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
