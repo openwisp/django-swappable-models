@@ -120,4 +120,4 @@ Swapper is used extensively in the [vera] extension to [wq.db].  vera provides [
 [wq.db]: http://wq.io/wq.db
 [vera]: http://wq.io/vera
 [wq.db.patterns]: http://wq.io/docs/about-patterns
-[7 inter-related models]: https://github.com/wq/wq.db/blob/master/contrib/vera/models.py
+[7 inter-related models]: https://github.com/wq/vera/blob/master/vera/models.py
