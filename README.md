@@ -113,7 +113,7 @@ def view(request, *args, **kwargs):
 ```
 
 ## Real-World Example
-Swapper is used extensively in [wq.db], particularly in the [vera] submodule, which has no less than [7 inter-related models], each of which can be swapped out for custom implementations.  (Swapper actually started out as part of [wq.db.patterns], but was extracted for more general-purpose use.)
+Swapper is used extensively in the [vera] extension to [wq.db].  vera provides [7 inter-related models], each of which can be swapped out for custom implementations.  (Swapper actually started out as part of [wq.db.patterns], but was extracted for more general-purpose use.)
 
 [undocumented]: https://code.djangoproject.com/ticket/19103
 [swapping the auth.User model]: https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user
