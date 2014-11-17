@@ -119,7 +119,7 @@ def view(request, *args, **kwargs):
 ```
 
 ### Migration Scripts
-Swapper can also be used in Django 1.7 migration scripts to facilitate dependency ordering and foreign key references.  To use this feature, generate a migration script with `makemigrations` and make the following changes: 
+Swapper can also be used in Django 1.7+ migration scripts to facilitate dependency ordering and foreign key references.  To use this feature, generate a migration script with `makemigrations` and make the following changes: 
 
 ```diff
   # reusableapp/migrations/0001_initial.py
@@ -167,6 +167,19 @@ Swapper can also be used in Django 1.7 migration scripts to facilitate dependenc
           ),
       ]
 ```
+
+## API Documentation
+
+function | purpose
+---------|--------
+`swappable_setting(app_label, model)` | Generates a swappable setting name for the provided model (e.g. `"REUSABLEAPP_PARENT_MODEL"`)
+`is_swapped(app_label, model)` | Determines whether or not a given model has been swapped.  (Returns the model name if swapped, otherwise `False`)
+`get_model_name(app_label, model)` | Gets the name of the model the swappable model has been swapped for (or the name of the original model if not swapped.)
+`get_model_names(app_label, models)` | Match a list of model names to their swapped versions.  All of the models should be from the same app.
+`load_model(app_label, model, required=True)` | Load the swapped model class for a swappable model (or the original model if it hasn't been swapped).
+`dependency(app_label, model)` | Generate a dependency tuple for use in Django 1.7+ migrations.
+`set_app_prefix(app_label, prefix)` | Set a custom prefix for swappable settings (the default is the upper case `app_label`).  Used in [wq.db] to make all of the swappable settings start with `"WQ"` (e.g. `WQ_FILE_MODEL` instead of `FILES_FILE_MODEL`).  This should be set at the top of your models.py.
+`join(app_label, model)`, `split(model)` | Utilities for splitting and joining `"app.Model"` strings and `("app", "Model")` tuples.
 
 [undocumented]: https://code.djangoproject.com/ticket/19103
 [swapping the auth.User model]: https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user
