@@ -41,10 +41,13 @@ would either need to:
 This third approach is taken by Django to facilitate [swapping the auth.User
 model].  Swapper extends this approach to apply to any model.
 
+## Real-World Example
+Swapper is used extensively in the [vera] extension to [wq.db].  vera provides [7 inter-related models], each of which can be swapped out for custom implementations.  (Swapper actually started out as part of [wq.db.patterns], but was extracted for more general-purpose use.)
+
 ## Getting Started
 
 ```bash
-pip install swapper
+pip3 install swapper
 ```
 
 ## Usage
@@ -55,7 +58,7 @@ implementations:
 ```python
 # reusableapp/models.py
 from django.db import models
-from swapper import swappable_setting, get_model_name
+import swapper
 
 class BaseParent(models.Model):
     # minimal base implementation ...
@@ -65,10 +68,10 @@ class BaseParent(models.Model):
 class Parent(BaseParent):
     # default (swappable) implementation ...
     class Meta:
-       swappable = swappable_setting('reusableapp', 'Parent')
+       swappable = swapper.swappable_setting('reusableapp', 'Parent')
 
 class BaseChild(models.Model):
-    parent = models.ForeignKey(get_model_name('reusableapp', 'Parent'))
+    parent = models.ForeignKey(swapper.get_model_name('reusableapp', 'Parent'))
     # minimal base implementation ...
     class Meta:
         abstract = True
@@ -76,10 +79,11 @@ class BaseChild(models.Model):
 class Child(BaseChild):
     # default (swappable) implementation ...
     class Meta:
-       swappable = swappable_setting('reusableapp', 'Child')
+       swappable = swapper.swappable_setting('reusableapp', 'Child')
 ```
 
-Then the user can override one or both models in their own app:
+### User Customization
+With the above setup, the user of your app can override one or both models in their own app:
 
 ```python
 # myapp/models.py
@@ -95,6 +99,8 @@ The user then specifies the appropriate setting to trigger the swap:
 REUSABLEAPP_PARENT_MODEL = "myapp.Parent"
 ```
 
+### Loading Swapped Models
+
 Note: Instead of importing concrete models directly, always use the swapper:
 
 ```python
@@ -103,17 +109,64 @@ Note: Instead of importing concrete models directly, always use the swapper:
 # Might work, might not
 # from .models import Parent
 
-from swapper import load_model
-Parent = load_model("reusableapp", "Parent")
-Child = load_model("reusableapp", "Parent")
+import swapper
+Parent = swapper.load_model("reusableapp", "Parent")
+Child = swapper.load_model("reusableapp", "Parent")
 
 def view(request, *args, **kwargs):
     qs = Parent.objects.all()
     # ...
 ```
 
-## Real-World Example
-Swapper is used extensively in the [vera] extension to [wq.db].  vera provides [7 inter-related models], each of which can be swapped out for custom implementations.  (Swapper actually started out as part of [wq.db.patterns], but was extracted for more general-purpose use.)
+### Migration Scripts
+Swapper can also be used in Django 1.7 migration scripts to facilitate dependency ordering and foreign key references.  To use this feature, generate a migration script with `makemigrations` and make the following changes: 
+
+```diff
+  # reusableapp/migrations/0001_initial.py
+
+  from django.db import models, migrations
+< from django.conf import settings
+> import swapper
+
+  class Migration(migrations.Migration):
+
+      dependencies = [
+<          migrations.swappable_dependency(settings.REUSABLEAPP_PARENT_MODEL),
+>          swapper.dependency('reusableapp', 'Parent')
+      ]
+
+      operations = [
+          migrations.CreateModel(
+              name='Child',
+              fields=[
+                  ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+              ],
+              options={
+<                 'swappable': 'REUSABLEAPP_CHILD_MODEL',
+>                 'swappable': swapper.swappable_setting('reusableapp', 'Child'),
+              },
+              bases=(models.Model,),
+          ),
+          migrations.CreateModel(
+              name='Parent',
+              fields=[
+                  ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+              ],
+              options={
+<                 'swappable': 'REUSABLEAPP_PARENT_MODEL',
+>                 'swappable': swapper.swappable_setting('reusableapp', 'Child'),
+              },
+              bases=(models.Model,),
+          ),
+          migrations.AddField(
+              model_name='child',
+              name='parent',
+<             field=models.ForeignKey(to=settings.REUSABLEAPP_PARENT_MODEL),
+>             field=models.ForeignKey(to=swapper.get_model_name('reusableapp', 'Parent')),
+              preserve_default=True,
+          ),
+      ]
+```
 
 [undocumented]: https://code.djangoproject.com/ticket/19103
 [swapping the auth.User model]: https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user
