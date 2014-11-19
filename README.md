@@ -12,7 +12,7 @@ arbitrary swappable models in your own reusable apps.
 
 Tested on Python 2.7 and 3.4, with Django 1.6 and 1.7.
 
-## Example Use Case
+## Motivation
 
 Suppose your reusable app has two related tables:
 
@@ -27,7 +27,7 @@ class Child(models.Model):
 ```
 
 Suppose further that you want to allow the user to subclass either or both of
-these models and supplement them with their own implementations.  You could use
+these models and supplement them with their own additional fields.  You could use
 Abstract classes (e.g. `BaseParent` and `BaseChild`) for this, but then you
 would either need to:
 
@@ -38,8 +38,9 @@ would either need to:
  3. Use swappable models, together with `ForeignKeys` that read the swappable
     settings.
 
-This third approach is taken by Django to facilitate [swapping the auth.User
-model].  Swapper extends this approach to apply to any model.
+This third approach is taken by Django to facilitate [swapping the auth.User model]. The `auth.User` swappable code was implemented in a generic way that allows it to be used for any model.  Although this capability is currently [undocumented] while any remaining issues are being sorted out, the it has proven to be very stable and useful in our experience.
+
+Swapper is essentially a simple API wrapper around this existing functionality.
 
 ## Real-World Example
 Swapper is used extensively in the [vera] extension to [wq.db].  vera provides [7 inter-related models], each of which can be swapped out for custom implementations.  (Swapper actually started out as part of [wq.db.patterns], but was extracted for more general-purpose use.)
