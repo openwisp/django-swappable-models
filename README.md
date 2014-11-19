@@ -101,7 +101,7 @@ REUSABLEAPP_PARENT_MODEL = "myapp.Parent"
 
 ### Loading Swapped Models
 
-Note: Instead of importing concrete models directly, always use the swapper:
+In your views and other functions, always use the swapper instead of importing swappable models directly.
 
 ```python
 # reusableapp/views.py
@@ -117,6 +117,8 @@ def view(request, *args, **kwargs):
     qs = Parent.objects.all()
     # ...
 ```
+
+> Note: `swapper.load_model()` is the general equivalent of [get_user_model()] and subject to the same constraints: e.g. it should not be used until after the model system has fully initialized.
 
 ### Migration Scripts
 Swapper can also be used in Django 1.7+ migration scripts to facilitate dependency ordering and foreign key references.  To use this feature, generate a migration script with `makemigrations` and make the following changes: 
@@ -187,3 +189,4 @@ function | purpose
 [vera]: http://wq.io/vera
 [wq.db.patterns]: http://wq.io/docs/about-patterns
 [7 inter-related models]: https://github.com/wq/vera/blob/master/vera/models.py
+[get_user_model()]: https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#referencing-the-user-model
