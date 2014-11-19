@@ -38,7 +38,7 @@ would either need to:
  3. Use swappable models, together with `ForeignKeys` that read the swappable
     settings.
 
-This third approach is taken by Django to facilitate [swapping the auth.User model]. The `auth.User` swappable code was implemented in a generic way that allows it to be used for any model.  Although this capability is currently [undocumented] while any remaining issues are being sorted out, the it has proven to be very stable and useful in our experience.
+This third approach is taken by Django to facilitate [swapping the auth.User model]. The `auth.User` swappable code was implemented in a generic way that allows it to be used for any model.  Although this capability is currently [undocumented] while any remaining issues are being sorted out, it has proven to be very stable and useful in our experience.
 
 Swapper is essentially a simple API wrapper around this existing functionality.
 
@@ -185,7 +185,7 @@ function | purpose
 `join(app_label, model)`, `split(model)` | Utilities for splitting and joining `"app.Model"` strings and `("app", "Model")` tuples.
 
 [undocumented]: https://code.djangoproject.com/ticket/19103
-[swapping the auth.User model]: https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user
+[swapping the auth.User model]: https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#auth-custom-user
 [wq.db]: http://wq.io/wq.db
 [vera]: http://wq.io/vera
 [wq.db.patterns]: http://wq.io/docs/about-patterns
