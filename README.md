@@ -8,7 +8,7 @@ feature: swappable models.  Swapper facilitates implementing
 arbitrary swappable models in your own reusable apps.
 
 [![Build Status](https://travis-ci.org/wq/django-swappable-models.svg?branch=master)](https://travis-ci.org/wq/django-swappable-models)
-[![PyPI Package](https://pypip.in/version/swapper/badge.png)](https://pypi.python.org/pypi/swapper)
+[![PyPI Package](https://pypip.in/version/swapper/badge.svg?style=flat)](https://pypi.python.org/pypi/swapper)
 
 Tested on Python 2.7 and 3.4, with Django 1.6 and 1.7.
 
