@@ -112,7 +112,7 @@ In your views and other functions, always use the swapper instead of importing s
 
 import swapper
 Parent = swapper.load_model("reusableapp", "Parent")
-Child = swapper.load_model("reusableapp", "Parent")
+Child = swapper.load_model("reusableapp", "Child")
 
 def view(request, *args, **kwargs):
     qs = Parent.objects.all()
