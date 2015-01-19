@@ -157,7 +157,7 @@ Swapper can also be used in Django 1.7+ migration scripts to facilitate dependen
               ],
               options={
 <                 'swappable': 'REUSABLEAPP_PARENT_MODEL',
->                 'swappable': swapper.swappable_setting('reusableapp', 'Child'),
+>                 'swappable': swapper.swappable_setting('reusableapp', 'Parent'),
               },
               bases=(models.Model,),
           ),
