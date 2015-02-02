@@ -189,5 +189,5 @@ function | purpose
 [wq.db]: http://wq.io/wq.db
 [vera]: http://wq.io/vera
 [wq.db.patterns]: http://wq.io/docs/about-patterns
-[7 inter-related models]: https://github.com/wq/vera/blob/master/vera/models.py
+[7 inter-related models]: https://github.com/wq/vera#models
 [get_user_model()]: https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#referencing-the-user-model
