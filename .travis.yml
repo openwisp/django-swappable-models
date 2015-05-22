@@ -1,15 +1,8 @@
+sudo: false
 language: python
 python:
  - "2.7"
+ - "3.3"
  - "3.4"
-env:
- - DJANGO="django==1.6.11" DJANGO_SETTINGS_MODULE="tests.settings"
- - DJANGO="django==1.6.11" DJANGO_SETTINGS_MODULE="tests.swap_settings"
- - DJANGO="django==1.7.7"  DJANGO_SETTINGS_MODULE="tests.settings"
- - DJANGO="django==1.7.7"  DJANGO_SETTINGS_MODULE="tests.swap_settings"
- - DJANGO="django==1.8"    DJANGO_SETTINGS_MODULE="tests.settings"
- - DJANGO="django==1.8"    DJANGO_SETTINGS_MODULE="tests.swap_settings"
-install:
- - pip install $DJANGO
-script:
- - python setup.py test
+install: pip install tox-travis
+script: tox
