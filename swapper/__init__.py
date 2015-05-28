@@ -57,10 +57,10 @@ def get_model_names(app_label, models):
     """
     Map model names to their swapped equivalents for the given app
     """
-    return {
-        model: get_model_name(app_label, model)
+    return dict(
+        (model, get_model_name(app_label, model))
         for model in models
-    }
+    )
 
 
 def load_model(app_label, model, orm=None, required=True):
