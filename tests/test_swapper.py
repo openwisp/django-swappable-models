@@ -1,5 +1,10 @@
 from django.test import TestCase
-import unittest
+import sys
+
+if sys.version_info < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 import swapper
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -17,10 +22,10 @@ class SwapperTestCase(TestCase):
     # Tests that should work whether or not default_app.Type is swapped
     def test_fields(self):
         Type = swapper.load_model('default_app', 'Type')
-        fields = {
-            field.name: field
+        fields = dict(
+            (field.name, field)
             for field in Type._meta.fields
-        }
+        )
         self.assertIn('name', fields)
 
     def test_create(self):
@@ -55,10 +60,10 @@ class SwapperTestCase(TestCase):
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
     def test_swap_fields(self):
         Type = swapper.load_model('default_app', 'Type')
-        fields = {
-            field.name: field
+        fields = dict(
+            (field.name, field)
             for field in Type._meta.fields
-        }
+        )
         self.assertIn('code', fields)
 
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
