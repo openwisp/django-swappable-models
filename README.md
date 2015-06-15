@@ -8,6 +8,8 @@ feature: swappable models.  Swapper facilitates implementing
 arbitrary swappable models in your own reusable apps.
 
 [![Latest PyPI Release](https://img.shields.io/pypi/v/swapper.svg)](https://pypi.python.org/pypi/swapper)
+[![Release Notes](https://img.shields.io/github/release/wq/django-swappable-models.svg
+)](https://github.com/wq/django-swappable-models/releases)
 [![License](https://img.shields.io/pypi/l/swapper.svg)](https://github.com/wq/django-swappable-models/blob/master/LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/network)
