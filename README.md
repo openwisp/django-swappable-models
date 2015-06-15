@@ -7,10 +7,15 @@ Swapper is an unofficial API for the [undocumented] but very powerful Django
 feature: swappable models.  Swapper facilitates implementing
 arbitrary swappable models in your own reusable apps.
 
-[![Build Status](https://travis-ci.org/wq/django-swappable-models.svg?branch=master)](https://travis-ci.org/wq/django-swappable-models)
-[![PyPI Package](https://pypip.in/version/swapper/badge.svg?style=flat)](https://pypi.python.org/pypi/swapper)
+[![Latest PyPI Release](https://img.shields.io/pypi/v/swapper.svg)](https://pypi.python.org/pypi/swapper)
+[![License](https://img.shields.io/pypi/l/swapper.svg)](https://github.com/wq/django-swappable-models/blob/master/LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/network)
+[![GitHub Issues](https://img.shields.io/github/issues/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/issues)
 
-Tested on Python 2.6, 2.7, 3.3, and 3.4, with Django 1.6, 1.7, and 1.8.
+[![Travis Build Status](https://img.shields.io/travis/wq/django-swappable-models.svg)](https://travis-ci.org/wq/django-swappable-models)
+[![Python Support](https://img.shields.io/pypi/pyversions/swapper.svg)](https://pypi.python.org/pypi/swapper)
+[![Django Support](https://img.shields.io/badge/Django-1.6%2C%201.7%2C%201.8-blue.svg)](https://pypi.python.org/pypi/swapper)
 
 ## Motivation
 
