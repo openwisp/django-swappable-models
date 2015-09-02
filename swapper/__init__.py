@@ -76,10 +76,17 @@ def load_model(app_label, model, orm=None, required=True):
         if orm is not None:
             return orm[join(app_label, model)]
 
-    from django.db.models import get_model
     try:
-        cls = get_model(app_label, model)
+        try:
+            # django >= 1.7
+            from django.apps import apps
+            cls = apps.get_model(app_label, model)
+        except ImportError:
+            # django < 1.7
+            from django.db.models import get_model
+            cls = get_model(app_label, model)
     except LookupError:
+        # both get_model versions can raise a LookupError
         cls = None
 
     if cls is None and required:
