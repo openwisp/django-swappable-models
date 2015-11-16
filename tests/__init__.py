@@ -4,10 +4,13 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', "tests.settings")
 from django.test.utils import setup_test_environment
 setup_test_environment()
 
-# Django 1.7
+from django.core.management import call_command
+
 import django
 if hasattr(django, 'setup'):
+    # Django 1.7+
     django.setup()
-
-from django.core.management import call_command
-call_command('syncdb', interactive=False)
+    call_command('migrate', interactive=False)
+else:
+    # Django 1.6
+    call_command('syncdb', interactive=False)
