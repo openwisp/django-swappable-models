@@ -10,6 +10,9 @@ import django
 if hasattr(django, 'setup'):
     # Django 1.7+
     django.setup()
+    call_command('makemigrations', 'default_app', interactive=False)
+    if os.environ["DJANGO_SETTINGS_MODULE"] == "tests.swap_settings":
+        call_command('makemigrations', 'alt_app', interactive=False)
     call_command('migrate', interactive=False)
 else:
     # Django 1.6
