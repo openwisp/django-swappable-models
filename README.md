@@ -47,21 +47,19 @@ would either need to:
 
 This third approach is taken by Django to facilitate [swapping the auth.User model]. The `auth.User` swappable code was implemented in a generic way that allows it to be used for any model.  Although this capability is currently [undocumented] while any remaining issues are being sorted out, it has proven to be very stable and useful in our experience.
 
-Swapper is essentially a simple API wrapper around this existing functionality.
+Swapper is essentially a simple API wrapper around this existing functionality.  Note that Swapper is primarily a tool for library authors; users of your reusable app generally should not need to know about Swapper in order to use it.  (See the notes on [End User Documentation](#end-user-documentation) below.)
 
-## Real-World Example
+### Real-World Example
 Swapper is used extensively in the [vera] extension to [wq.db].  vera provides [7 inter-related models], each of which can be swapped out for custom implementations.  (Swapper actually started out as part of [wq.db.patterns], but was extracted for more general-purpose use.)
 
-## Getting Started
+## Creating a Reusable App
+
+First, make sure you have `swapper` installed.  If you are publishing your reusable app as a Python package, be sure to add `swapper` to your project's dependencies (e.g. `setup.py`) to ensure that users of your app don't have errors integrating it.
 
 ```bash
 pip3 install swapper
 ```
-
-## Usage
-
-Extending the above example, create abstract base classes and default 
-implementations:
+Extending the above example, you might create two abstract base classes and corresponding default implementations:
 
 ```python
 # reusableapp/models.py
@@ -90,26 +88,9 @@ class Child(BaseChild):
        swappable = swapper.swappable_setting('reusableapp', 'Child')
 ```
 
-### User Customization
-With the above setup, the user of your app can override one or both models in their own app:
-
-```python
-# myapp/models.py
-from reusableapp.models import BaseParent
-class Parent(BaseParent):
-    # custom implementation ...
-```
-
-The user then specifies the appropriate setting to trigger the swap:
-
-```python
-# myproject/settings.py
-REUSABLEAPP_PARENT_MODEL = "myapp.Parent"
-```
-
 ### Loading Swapped Models
 
-In your views and other functions, always use the swapper instead of importing swappable models directly.
+In your reusable views and other functions, always use the swapper instead of importing swappable models directly.  This is because you might not know whether the user of your app is using your default implementation or their own version.
 
 ```python
 # reusableapp/views.py
@@ -129,7 +110,7 @@ def view(request, *args, **kwargs):
 > Note: `swapper.load_model()` is the general equivalent of [get_user_model()] and subject to the same constraints: e.g. it should not be used until after the model system has fully initialized.
 
 ### Migration Scripts
-Swapper can also be used in Django 1.7+ migration scripts to facilitate dependency ordering and foreign key references.  To use this feature, generate a migration script with `makemigrations` and make the following changes: 
+Swapper can also be used in Django 1.7+ migration scripts to facilitate dependency ordering and foreign key references.  To use this feature in your library, generate a migration script with `makemigrations` and make the following changes.  In general, users of your library should not need to make any similar changes to their own migration scripts.  The one exception is if you have multiple levels of swappable models with foreign keys pointing to each other (as in [vera]).
 
 ```diff
   # reusableapp/migrations/0001_initial.py
@@ -178,7 +159,30 @@ Swapper can also be used in Django 1.7+ migration scripts to facilitate dependen
       ]
 ```
 
+## End User Documentation
+With the above setup, the user of your app can override one or both models in their own app.  You might provide them with an example like this:
+
+```python
+# myapp/models.py
+from reusableapp.models import BaseParent
+class Parent(BaseParent):
+    # custom implementation ...
+```
+
+Then, tell your users to update their settings to trigger the swap.
+
+```python
+# myproject/settings.py
+REUSABLEAPP_PARENT_MODEL = "myapp.Parent"
+```
+
+The goal is to make this process just as easy for your end user as [swapping the auth.User model] is.  As with `auth.User`, there are some important caveats that you may want to inform your users about.
+
+The biggest issue is that your users will probably need to define the swapped model settings **before creating any migrations** for their implementation of `myapp`.  Due to key assumptions made within Django's migration infrastructure, it is difficult to start out with a default (non-swapped) model and then later to switch to a swapped implementation without doing some migration hacking.  This is somewhat awkward - as your users will most likely want to try out your default implementation before deciding to customize it.  Unfortunately, there isn't an easy workaround due to how the swappable setting is currently implemented in Django core.  This will likely be addressed in future Django versions (see [#10] and [Django ticket #25313]).
+
 ## API Documentation
+
+Here is the full API for `swapper`, which you may find useful in creating your reusable app code.  End users of your library should generally not need to reference this API.
 
 function | purpose
 ---------|--------
@@ -192,9 +196,11 @@ function | purpose
 `join(app_label, model)`, `split(model)` | Utilities for splitting and joining `"app.Model"` strings and `("app", "Model")` tuples.
 
 [undocumented]: https://code.djangoproject.com/ticket/19103
-[swapping the auth.User model]: https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#auth-custom-user
+[swapping the auth.User model]: https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#auth-custom-user
 [wq.db]: http://wq.io/wq.db
 [vera]: http://wq.io/vera
 [wq.db.patterns]: http://wq.io/docs/about-patterns
 [7 inter-related models]: https://github.com/wq/vera#models
-[get_user_model()]: https://docs.djangoproject.com/en/1.7/topics/auth/customizing/#referencing-the-user-model
+[get_user_model()]: https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#referencing-the-user-model
+[#10]: https://github.com/wq/django-swappable-models/issues/10
+[Django ticket #25313]: https://code.djangoproject.com/ticket/25313
