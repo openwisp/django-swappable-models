@@ -52,6 +52,11 @@ class SwapperTestCase(TestCase):
     def test_non_contrib_app_split(self):
         self.assertEqual(swapper.split('alt_app.Type'), ('alt_app', 'Type'))
 
+    def test_contrib_app_split(self):
+        self.assertEqual(
+            swapper.split('alt_app.contrib.named_things.NamedThing'),
+            ('alt_app.contrib.named_things', 'NamedThing'))
+
     # Tests that only work if default_app.Type is swapped
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
     def test_swap_setting(self):
