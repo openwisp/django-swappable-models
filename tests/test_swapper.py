@@ -49,6 +49,9 @@ class SwapperTestCase(TestCase):
         with self.assertRaises(ImproperlyConfigured):
             swapper.load_model("invalid_app", "Invalid", required=True)
 
+    def test_non_contrib_app_split(self):
+        self.assertEqual(swapper.split('alt_app.Type'), ('alt_app', 'Type'))
+
     # Tests that only work if default_app.Type is swapped
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
     def test_swap_setting(self):
