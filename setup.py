@@ -33,7 +33,7 @@ def parse_markdown_readme():
 
 setup(
     name='swapper',
-    version='1.0.0',
+    version='1.1.0-dev',
     author='S. Andrew Sheppard',
     author_email='andrew@wq.io',
     url='https://github.com/wq/django-swappable-models',
@@ -42,7 +42,6 @@ setup(
     description=LONG_DESCRIPTION.strip(),
     long_description=parse_markdown_readme(),
     classifiers=[
-        'Framework :: Django',
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'License :: OSI Approved :: MIT License',
@@ -55,6 +54,14 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Framework :: Django',
+        'Framework :: Django :: 1.6',
+        'Framework :: Django :: 1.7',
+        'Framework :: Django :: 1.8',
+        'Framework :: Django :: 1.9',
+        'Framework :: Django :: 1.10',
+        'Framework :: Django :: 1.11',
     ],
     tests_require=['django>=1.6'],
     test_suite='tests',

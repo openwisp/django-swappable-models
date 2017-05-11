@@ -17,7 +17,7 @@ arbitrary swappable models in your own reusable apps.
 
 [![Travis Build Status](https://img.shields.io/travis/wq/django-swappable-models.svg)](https://travis-ci.org/wq/django-swappable-models)
 [![Python Support](https://img.shields.io/pypi/pyversions/swapper.svg)](https://pypi.python.org/pypi/swapper)
-[![Django Support](https://img.shields.io/badge/Django-1.6%2C%201.7%2C%201.8%2C%201.9%2C%201.10-blue.svg)](https://pypi.python.org/pypi/swapper)
+[![Django Support](https://img.shields.io/badge/Django-1.6%2C%201.7%2C%201.8%2C%201.9%2C%201.10%2C%201.11-blue.svg)](https://pypi.python.org/pypi/swapper)
 
 ## Motivation
 
