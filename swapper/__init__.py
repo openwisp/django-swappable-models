@@ -111,5 +111,5 @@ def join(app_label, model):
 
 
 def split(model):
-    app_label, model = model.split(".")
+    app_label, _, model = model.rpartition(".")
     return app_label, model
