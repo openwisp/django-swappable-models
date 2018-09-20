@@ -15,6 +15,8 @@ class Type(BaseType):
 
 
 class Item(models.Model):
-    type = models.ForeignKey(swapper.get_model_name('default_app', "Type"))
+    type = models.ForeignKey(
+        swapper.get_model_name('default_app', "Type"), on_delete=models.CASCADE
+    )
     name = models.CharField(max_length=255)
     description = models.TextField()
