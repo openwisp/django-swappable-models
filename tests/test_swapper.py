@@ -1,5 +1,4 @@
 from django.test import TestCase
-import sys
 import swapper
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
