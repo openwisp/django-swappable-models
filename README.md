@@ -7,7 +7,7 @@ Swapper is an unofficial API for the [undocumented] but very powerful Django
 feature: swappable models.  Swapper facilitates implementing
 arbitrary swappable models in your own reusable apps.
 
-[![Latest PyPI Release](https://img.shields.io/pypi/v/swapper.svg)](https://pypi.python.org/pypi/swapper)
+[![Latest PyPI Release](https://img.shields.io/pypi/v/swapper.svg)](https://pypi.org/project/swapper)
 [![Release Notes](https://img.shields.io/github/release/wq/django-swappable-models.svg
 )](https://github.com/wq/django-swappable-models/releases)
 [![License](https://img.shields.io/pypi/l/swapper.svg)](https://github.com/wq/django-swappable-models/blob/master/LICENSE)
@@ -16,8 +16,8 @@ arbitrary swappable models in your own reusable apps.
 [![GitHub Issues](https://img.shields.io/github/issues/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/issues)
 
 [![Travis Build Status](https://img.shields.io/travis/wq/django-swappable-models.svg)](https://travis-ci.org/wq/django-swappable-models)
-[![Python Support](https://img.shields.io/pypi/pyversions/swapper.svg)](https://pypi.python.org/pypi/swapper)
-[![Django Support](https://img.shields.io/badge/Django-1.6%2C%201.7%2C%201.8%2C%201.9%2C%201.10%2C%201.11%2C%202.0%2C%202.1-blue.svg)](https://pypi.python.org/pypi/swapper)
+[![Python Support](https://img.shields.io/pypi/pyversions/swapper.svg)](https://pypi.org/project/swapper)
+[![Django Support](https://img.shields.io/pypi/djversions/swapper.svg)](https://pypi.org/project/swapper)
 
 ## Motivation
 
