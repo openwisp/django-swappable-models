@@ -5,10 +5,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
+import unittest
 
 try:
     from django.db import migrations  # noqa

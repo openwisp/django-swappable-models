@@ -1,14 +1,12 @@
 language: python
 dist: xenial
 python:
- - "2.6"
  - "2.7"
- - "3.3"
  - "3.4"
  - "3.5"
  - "3.6"
  - "3.7"
 install:
- - if [[ $TRAVIS_PYTHON_VERSION == 3.3 ]]; then pip install "virtualenv==15.2.0" "tox-travis<=0.10" "tox<=2.9.1" "pluggy<=0.7.1"; else pip install tox-travis; fi
+ - pip install tox-travis
  - pip install flake8
 script: tox
