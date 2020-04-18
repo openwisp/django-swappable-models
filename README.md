@@ -184,7 +184,7 @@ The biggest issue is that your users will probably need to define the swapped mo
 
 Here is the full API for `swapper`, which you may find useful in creating your reusable app code.  End users of your library should generally not need to reference this API.
 
-function | purpose
+Function | Purpose
 ---------|--------
 `swappable_setting(app_label, model)` | Generates a swappable setting name for the provided model (e.g. `"REUSABLEAPP_PARENT_MODEL"`)
 `is_swapped(app_label, model)` | Determines whether or not a given model has been swapped.  (Returns the model name if swapped, otherwise `False`)
