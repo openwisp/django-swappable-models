@@ -63,7 +63,7 @@ def get_model_names(app_label, models):
     )
 
 
-def load_model(app_label, model, orm=None, required=True):
+def load_model(app_label, model, orm=None, required=True, require_ready=True):
     """
     Load the specified model class, or the class it was swapped out for.
     If a South orm object is provided, it will be used (but only if the
@@ -78,9 +78,14 @@ def load_model(app_label, model, orm=None, required=True):
 
     try:
         try:
-            # django >= 1.7
+            # django >= 2.0
             from django.apps import apps
-            cls = apps.get_model(app_label, model)
+            try:
+                cls = apps.get_model(app_label, model,
+                                     require_ready=require_ready)
+            # django >= 1.7, django <= 1.9
+            except TypeError:
+                cls = apps.get_model(app_label, model)
         except ImportError:
             # django < 1.7
             from django.db.models import get_model
