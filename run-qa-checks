@@ -17,4 +17,5 @@ SAMPLE_APP=1 openwisp-qa-check \
     --skip-checkcommit \
     --skip-black \
     --migration-path ./tests/openwisp2/sample_firmware_upgrader/migrations/ \
-    --migration-module sample_fir
+    --migration-module sample_firmware_upgrader
+    
