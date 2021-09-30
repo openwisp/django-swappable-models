@@ -1,21 +1,10 @@
 #!/bin/bash
 set -e
 openwisp-qa-check \
-    --migration-path ./openwisp_firmware_upgrader/migrations \
-    --migration-module firmware_upgrader
 
-# JShint checks
-jshint openwisp_firmware_upgrader/static/firmware-upgrader/js/*.js
-
-echo ''
-echo 'Running checks for SAMPLE_APP'
-SAMPLE_APP=1 openwisp-qa-check \
     --skip-isort \
     --skip-flake8 \
-    --skip-checkmigrations \
     --skip-checkendline \
     --skip-checkcommit \
     --skip-black \
-    --migration-path ./tests/openwisp2/sample_firmware_upgrader/migrations/ \
-    --migration-module sample_firmware_upgrader
     
