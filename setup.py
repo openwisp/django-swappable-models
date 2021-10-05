@@ -45,5 +45,5 @@ setup(
     ],
     tests_require=['django>=2.0'],
     test_suite='tests',
-    setup_requires=['setuptools_scm',],
+    setup_requires=['setuptools_scm'],
 )
