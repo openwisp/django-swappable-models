@@ -1,6 +1,4 @@
-import os
-import sys
-from setuptools import setup, find_packages
+from setuptools import setup
 
 LONG_DESCRIPTION = """
 The unofficial Django swappable models API.
@@ -47,7 +45,5 @@ setup(
     ],
     tests_require=['django>=2.0'],
     test_suite='tests',
-    setup_requires=[
-        'setuptools_scm',
-    ],
+    setup_requires=['setuptools_scm',],
 )

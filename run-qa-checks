@@ -1,10 +1,3 @@
 #!/bin/bash
 set -e
 openwisp-qa-check \
-
-    --skip-isort \
-    --skip-flake8 \
-    --skip-checkendline \
-    --skip-checkcommit \
-    --skip-black \
-    
