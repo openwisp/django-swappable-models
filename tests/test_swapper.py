@@ -54,9 +54,7 @@ class SwapperTestCase(TestCase):
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
     def test_swap_setting(self):
         self.assertTrue(swapper.is_swapped("default_app", "Type"))
-        self.assertEqual(
-            swapper.get_model_name("default_app", "Type"), "alt_app.Type"
-        )  # noqa
+        self.assertEqual(swapper.get_model_name("default_app", "Type"), "alt_app.Type")
 
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
     def test_swap_fields(self):
@@ -70,17 +68,14 @@ class SwapperTestCase(TestCase):
         Item = swapper.load_model('default_app', 'Item')
 
         Item.objects.create(
-            type=Type.objects.create(name="Type 1", code="type-1",),
-            name="Item 1",  # noqa
+            type=Type.objects.create(name="Type 1", code="type-1",), name="Item 1",
         )
 
         self.assertEqual(Item.objects.count(), 1)
         item = Item.objects.all()[0]
         self.assertEqual(item.type.code, "type-1")
 
-    @unittest.skipUnless(
-        settings.SWAP and DJ17, "requires swapped models & Django 1.7"
-    )  # noqa
+    @unittest.skipUnless(settings.SWAP and DJ17, "requires swapped models & Django 1.7")
     def test_swap_dependency(self):
         self.assertEqual(
             swapper.dependency("default_app", "Type"), ("alt_app", "__first__")
@@ -99,6 +94,5 @@ class SwapperTestCase(TestCase):
     )
     def test_default_dependency(self):
         self.assertEqual(
-            swapper.dependency("default_app", "Type"),
-            ("default_app", "__first__"),  # noqa
+            swapper.dependency("default_app", "Type"), ("default_app", "__first__"),
         )
