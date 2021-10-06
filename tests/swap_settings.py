@@ -1,6 +1,9 @@
-from .settings import INSTALLED_APPS
+from . import settings
 
 DEFAULT_APP_TYPE_MODEL = "alt_app.Type"
+MIDDLEWARE_CLASSES = settings.MIDDLEWARE_CLASSES
+DATABASES = settings.DATABASES
+INSTALLED_APPS = settings.INSTALLED_APPS
 INSTALLED_APPS += ('tests.alt_app',)
-
+SECRET_KEY = settings.SECRET_KEY
 SWAP = True
