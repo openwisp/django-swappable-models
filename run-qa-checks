@@ -1,3 +1,4 @@
 #!/bin/bash
 set -e
-openwisp-qa-check
+openwisp-qa-check \
+	--skip-checkmigrations
