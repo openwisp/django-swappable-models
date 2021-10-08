@@ -1,7 +1,6 @@
+from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.apps import apps
-
 
 _prefixes = {}
 
@@ -12,8 +11,7 @@ def swappable_setting(app_label, model):
     """
     prefix = _prefixes.get(app_label, app_label)
     setting = "{prefix}_{model}_MODEL".format(
-        prefix=prefix.upper(),
-        model=model.upper()
+        prefix=prefix.upper(), model=model.upper()
     )
 
     # Ensure this attribute exists to avoid migration issues in Django 1.7
@@ -51,6 +49,7 @@ def dependency(app_label, model):
     migration.dependencies[]
     """
     from django.db.migrations import swappable_dependency
+
     return swappable_dependency(get_model_name(app_label, model))
 
 
@@ -58,10 +57,7 @@ def get_model_names(app_label, models):
     """
     Map model names to their swapped equivalents for the given app
     """
-    return dict(
-        (model, get_model_name(app_label, model))
-        for model in models
-    )
+    return dict((model, get_model_name(app_label, model)) for model in models)
 
 
 def load_model(app_label, model, required=True, require_ready=True):
@@ -92,10 +88,7 @@ def set_app_prefix(app_label, prefix):
 
 
 def join(app_label, model):
-    return "{app_label}.{model}".format(
-        app_label=app_label,
-        model=model,
-    )
+    return "{app_label}.{model}".format(app_label=app_label, model=model,)
 
 
 def split(model):
