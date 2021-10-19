@@ -1,6 +1,8 @@
 Swapper
 =======
 
+[![Dependency monitoring](https://img.shields.io/librariesio/release/github/openwisp/django-swappable-models)](https://libraries.io/github/openwisp/django-swappable-models)
+
 #### Django Swappable Models - No longer only for auth.User!
 
 Swapper is an unofficial API for the [undocumented] but very powerful Django 
