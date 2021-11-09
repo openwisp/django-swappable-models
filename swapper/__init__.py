@@ -1,6 +1,7 @@
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.db.migrations import swappable_dependency
 
 _prefixes = {}
 
@@ -48,8 +49,6 @@ def dependency(app_label, model, latest=False):
     Returns a Django 1.7+ style dependency tuple for inclusion in
     migration.dependencies[]
     """
-    from django.db.migrations import swappable_dependency
-
     dependencies = swappable_dependency(get_model_name(app_label, model))
     if not latest:
         return dependencies
