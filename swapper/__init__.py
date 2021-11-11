@@ -90,7 +90,10 @@ def set_app_prefix(app_label, prefix):
 
 
 def join(app_label, model):
-    return "{app_label}.{model}".format(app_label=app_label, model=model,)
+    return "{app_label}.{model}".format(
+        app_label=app_label,
+        model=model,
+    )
 
 
 def split(model):
