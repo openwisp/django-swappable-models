@@ -80,6 +80,9 @@ class SwapperTestCase(TestCase):
         self.assertEqual(
             swapper.dependency("default_app", "Type"), ("alt_app", "__first__")
         )
+        self.assertEqual(
+            swapper.dependency("default_app", "Type", True), ("alt_app", "__latest__")
+        )
 
     # Tests that only work if default_app.Type is *not* swapped
     @unittest.skipIf(settings.SWAP, "requires non-swapped models")
