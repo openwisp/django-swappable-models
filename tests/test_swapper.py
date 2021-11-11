@@ -27,7 +27,8 @@ class SwapperTestCase(TestCase):
         Item = swapper.load_model('default_app', 'Item')
 
         Item.objects.create(
-            type=Type.objects.create(name="Type 1"), name="Item 1",
+            type=Type.objects.create(name="Type 1"),
+            name="Item 1",
         )
 
         self.assertEqual(Item.objects.count(), 1)
@@ -68,7 +69,11 @@ class SwapperTestCase(TestCase):
         Item = swapper.load_model('default_app', 'Item')
 
         Item.objects.create(
-            type=Type.objects.create(name="Type 1", code="type-1",), name="Item 1",
+            type=Type.objects.create(
+                name="Type 1",
+                code="type-1",
+            ),
+            name="Item 1",
         )
 
         self.assertEqual(Item.objects.count(), 1)
@@ -97,5 +102,6 @@ class SwapperTestCase(TestCase):
     )
     def test_default_dependency(self):
         self.assertEqual(
-            swapper.dependency("default_app", "Type"), ("default_app", "__first__"),
+            swapper.dependency("default_app", "Type"),
+            ("default_app", "__first__"),
         )
