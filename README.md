@@ -10,14 +10,14 @@ feature: swappable models.  Swapper facilitates implementing
 arbitrary swappable models in your own reusable apps.
 
 [![Latest PyPI Release](https://img.shields.io/pypi/v/swapper.svg)](https://pypi.org/project/swapper)
-[![Release Notes](https://img.shields.io/github/release/wq/django-swappable-models.svg
+[![Release Notes](https://img.shields.io/github/release/openwisp/django-swappable-models.svg
 )](https://github.com/wq/django-swappable-models/releases)
-[![License](https://img.shields.io/pypi/l/swapper.svg)](https://github.com/wq/django-swappable-models/blob/master/LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/network)
-[![GitHub Issues](https://img.shields.io/github/issues/wq/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/issues)
+[![License](https://img.shields.io/pypi/l/swapper.svg)](https://github.com/openwisp/django-swappable-models/blob/master/LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/openwisp/django-swappable-models.svg)](https://github.com/openwisp/django-swappable-models/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/openwisp/django-swappable-models.svg)](https://github.com/openwisp/django-swappable-models/network)
+[![GitHub Issues](https://img.shields.io/github/issues/openwisp/django-swappable-models.svg)](https://github.com/openwisp/django-swappable-models/issues)
 
-[![Travis Build Status](https://img.shields.io/travis/wq/django-swappable-models.svg)](https://travis-ci.org/wq/django-swappable-models)
+[![Build Status](https://github.com/openwisp/django-swappable-models/actions/workflows/ci.yml/badge.svg)](https://github.com/openwisp/django-swappable-models/actions/workflows/ci.yml)
 [![Python Support](https://img.shields.io/pypi/pyversions/swapper.svg)](https://pypi.org/project/swapper)
 [![Django Support](https://img.shields.io/pypi/djversions/swapper.svg)](https://pypi.org/project/swapper)
 
@@ -51,8 +51,15 @@ This third approach is taken by Django to facilitate [swapping the auth.User mod
 
 Swapper is essentially a simple API wrapper around this existing functionality.  Note that Swapper is primarily a tool for library authors; users of your reusable app generally should not need to know about Swapper in order to use it.  (See the notes on [End User Documentation](#end-user-documentation) below.)
 
-### Real-World Example
-Swapper is used extensively in the [vera] extension to [wq.db].  vera provides [7 inter-related models], each of which can be swapped out for custom implementations.  (Swapper actually started out as part of [wq.db.patterns], but was extracted for more general-purpose use.)
+### Real-World Examples
+
+Swapper is used extensively in several OpenWISP packages to facilitate customization and extension.  Notable examples include:
+
+ * [openwisp-users]
+ * [openwisp-controller]
+ * [openwisp-radius]
+
+The use of swapper in these packages promotes [Software Reusability][reusability], one of the core values of the OpenWISP project.
 
 ## Creating a Reusable App
 
@@ -112,7 +119,7 @@ def view(request, *args, **kwargs):
 > Note: `swapper.load_model()` is the general equivalent of [get_user_model()] and subject to the same constraints: e.g. it should not be used until after the model system has fully initialized.
 
 ### Migration Scripts
-Swapper can also be used in Django 1.7+ migration scripts to facilitate dependency ordering and foreign key references.  To use this feature in your library, generate a migration script with `makemigrations` and make the following changes.  In general, users of your library should not need to make any similar changes to their own migration scripts.  The one exception is if you have multiple levels of swappable models with foreign keys pointing to each other (as in [vera]).
+Swapper can also be used in migration scripts to facilitate dependency ordering and foreign key references.  To use this feature in your library, generate a migration script with `makemigrations` and make the following changes.  In general, users of your library should not need to make any similar changes to their own migration scripts.  The one exception is if you have multiple levels of swappable models with foreign keys pointing to each other.
 
 ```diff
   # reusableapp/migrations/0001_initial.py
@@ -193,17 +200,17 @@ function | purpose
 `get_model_name(app_label, model)` | Gets the name of the model the swappable model has been swapped for (or the name of the original model if not swapped.)
 `get_model_names(app_label, models)` | Match a list of model names to their swapped versions.  All of the models should be from the same app (though their swapped versions need not be).
 `load_model(app_label, model, required=True)` | Load the swapped model class for a swappable model (or the original model if it hasn't been swapped).  If your code can function without the specified model, set `required = False`.
-`dependency(app_label, model, latest=False)` | Generate a dependency tuple for use in Django 1.7+ migrations. Use `latest=True` only when depending on the first migration of the target dependency doesn't work (eg: when all migrations of the target module should be run), please keep in mind that using `latest=True` can have [drawbacks].
-`set_app_prefix(app_label, prefix)` | Set a custom prefix for swappable settings (the default is the upper case `app_label`).  Used in [wq.db] to make all of the swappable settings start with `"WQ"` (e.g. `WQ_FILE_MODEL` instead of `FILES_FILE_MODEL`).  This should be set at the top of your models.py.
+`dependency(app_label, model, latest=False)` | Generate a dependency tuple for use in migrations. Use `latest=True` only when depending on the first migration of the target dependency doesn't work (eg: when all migrations of the target module should be run), please keep in mind that using `latest=True` can have [drawbacks].
+`set_app_prefix(app_label, prefix)` | Set a custom prefix for swappable settings (the default is the upper case `app_label`).  This can be useful if the app has a long name or is part of a larger framework.  This should be set at the top of your models.py.
 `join(app_label, model)`, `split(model)` | Utilities for splitting and joining `"app.Model"` strings and `("app", "Model")` tuples.
 
 [undocumented]: https://code.djangoproject.com/ticket/19103
-[swapping the auth.User model]: https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#auth-custom-user
-[wq.db]: http://wq.io/wq.db
-[vera]: http://wq.io/vera
-[wq.db.patterns]: http://wq.io/docs/about-patterns
-[7 inter-related models]: https://github.com/wq/vera#models
-[get_user_model()]: https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#referencing-the-user-model
-[#10]: https://github.com/wq/django-swappable-models/issues/10
+[swapping the auth.User model]: https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#auth-custom-user
+[openwisp-users]: https://github.com/openwisp/openwisp-users#extend-openwisp-users
+[openwisp-controller]: https://github.com/openwisp/openwisp-controller#extending-openwisp-controller
+[openwisp-radius]: https://openwisp-radius.readthedocs.io/en/latest/developer/how_to_extend.html
+[reusability]: https://openwisp.io/docs/general/values.html#software-reusability-means-long-term-sustainability
+[get_user_model()]: https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#referencing-the-user-model
+[#10]: https://github.com/openwisp/django-swappable-models/issues/10
 [Django ticket #25313]: https://code.djangoproject.com/ticket/25313
 [drawbacks]: https://code.djangoproject.com/ticket/23071
