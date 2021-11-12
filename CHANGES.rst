@@ -1,6 +1,16 @@
 Changelog
 =========
 
+Version 1.2.0 [2021-11-12]
+--------------------------
+
+- [feature] Add possibility to point swappable dependency to ``__latest__``
+- [change] Added support for Python 3.9
+- [change] Added support for Django 3.2 and Django 4.0a1
+- [change] Dropped support for old Django versions (<2.2)
+- [change] Dropped support for old Python versions (<3.7)
+- [feature] Added optional ``require_ready`` argument to ``load_model`` function
+
 Version 1.1.2 [2020-01-15]
 --------------------------
 
