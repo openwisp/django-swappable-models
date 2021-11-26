@@ -200,7 +200,7 @@ function | purpose
 `get_model_name(app_label, model)` | Gets the name of the model the swappable model has been swapped for (or the name of the original model if not swapped.)
 `get_model_names(app_label, models)` | Match a list of model names to their swapped versions.  All of the models should be from the same app (though their swapped versions need not be).
 `load_model(app_label, model, required=True)` | Load the swapped model class for a swappable model (or the original model if it hasn't been swapped).  If your code can function without the specified model, set `required = False`.
-`dependency(app_label, model, latest=False)` | Generate a dependency tuple for use in migrations. Use `latest=True` only when depending on the first migration of the target dependency doesn't work (eg: when all migrations of the target module should be run), please keep in mind that using `latest=True` can have [drawbacks].
+`dependency(app_label, model, version=None)` | Generate a dependency tuple for use in migrations. Use `version` only when depending on the first migration of the target dependency doesn't work (eg: when all migrations of the target module should be run or other migrations depends on a custom migration), please keep in mind that using `version='__latest__'` can have [drawbacks].
 `set_app_prefix(app_label, prefix)` | Set a custom prefix for swappable settings (the default is the upper case `app_label`).  This can be useful if the app has a long name or is part of a larger framework.  This should be set at the top of your models.py.
 `join(app_label, model)`, `split(model)` | Utilities for splitting and joining `"app.Model"` strings and `("app", "Model")` tuples.
 
