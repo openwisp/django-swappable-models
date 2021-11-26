@@ -1,10 +1,11 @@
 Changelog
 =========
 
-Verson 1.3.0 [Unreleased]
+Verson 1.3.0 [unreleased]
 -------------------------
 
 - [change] Allow possibility to point swappable dependency to specific migration number
+  (instead of only to ``__latest__``)
 
 Version 1.2.0 [2021-11-12]
 --------------------------
