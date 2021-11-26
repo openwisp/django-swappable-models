@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Verson 1.3.0 [Unreleased]
+-------------------------
+
+- [change] Allow possibility to point swappable dependency to specific migration number
+
 Version 1.2.0 [2021-11-12]
 --------------------------
 
