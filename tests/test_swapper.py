@@ -86,7 +86,12 @@ class SwapperTestCase(TestCase):
             swapper.dependency("default_app", "Type"), ("alt_app", "__first__")
         )
         self.assertEqual(
-            swapper.dependency("default_app", "Type", True), ("alt_app", "__latest__")
+            swapper.dependency("default_app", "Type", "__latest__"),
+            ("alt_app", "__latest__"),
+        )
+        self.assertEqual(
+            swapper.dependency("default_app", "Type", "0001_custom_migration"),
+            ("alt_app", "0001_custom_migration"),
         )
 
     # Tests that only work if default_app.Type is *not* swapped

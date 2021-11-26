@@ -44,15 +44,15 @@ def get_model_name(app_label, model):
     return is_swapped(app_label, model) or join(app_label, model)
 
 
-def dependency(app_label, model, latest=False):
+def dependency(app_label, model, version=None):
     """
     Returns a Django 1.7+ style dependency tuple for inclusion in
     migration.dependencies[]
     """
     dependencies = swappable_dependency(get_model_name(app_label, model))
-    if not latest:
+    if not version:
         return dependencies
-    return dependencies[0], '__latest__'
+    return dependencies[0], version
 
 
 def get_model_names(app_label, models):
