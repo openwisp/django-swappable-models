@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Verson 1.3.0 [unreleased]
+Verson 1.3.0 [2021-11-29]
 -------------------------
 
 - [change] Allow possibility to point swappable dependency to specific migration number
