@@ -15,7 +15,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
 
     steps:
     - uses: actions/checkout@v2
@@ -28,8 +31,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
+      id: deps
       run: |
-        pip install -U "pip==20.2.4" wheel setuptools
+        pip install -U pip wheel setuptools
         pip install tox tox-gh-actions
         pip install openwisp-utils[qa]@https://github.com/openwisp/openwisp-utils/tarball/master
 
@@ -37,4 +41,5 @@ jobs:
       run: ./run-qa-checks
 
     - name: Test
+      if: ${{ !cancelled() && steps.deps.conclusion == 'success' }}
       run: tox
