@@ -1,6 +1,20 @@
 Changelog
 =========
 
+Version 1.4.0 [2024-08-14]
+--------------------------
+
+Changes
+~~~~~~~
+
+Dependencies
+++++++++++++
+
+- Added support for Django ``4.2`` and ``5.0``.
+- Dropped support for Django ``Django 4.0a1``.
+- Added support for Python ``3.10`` and ``3.11``.
+- Dropped support for Python ``3.7``.
+
 Verson 1.3.0 [2021-11-29]
 -------------------------
 
