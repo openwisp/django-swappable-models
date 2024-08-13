@@ -15,7 +15,6 @@ else:
 
 
 class SwapperTestCase(TestCase):
-
     # Tests that should work whether or not default_app.Type is swapped
     def test_fields(self):
         Type = swapper.load_model('default_app', 'Type')

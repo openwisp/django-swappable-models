@@ -7,8 +7,10 @@ _prefixes = {}
 
 
 def swappable_setting(app_label, model):
-    """
-    Returns the setting name to use for the given model (i.e. AUTH_USER_MODEL)
+    """Returns the setting name to use for the given model
+
+    Returns the setting name to use for the given model (i.e.
+    AUTH_USER_MODEL)
     """
     prefix = _prefixes.get(app_label, app_label)
     setting = "{prefix}_{model}_MODEL".format(
@@ -23,7 +25,8 @@ def swappable_setting(app_label, model):
 
 
 def is_swapped(app_label, model):
-    """
+    """Returns the value of the swapped setting.
+
     Returns the value of the swapped setting, or False if the model hasn't
     been swapped.
     """
@@ -37,15 +40,17 @@ def is_swapped(app_label, model):
 
 
 def get_model_name(app_label, model):
-    """
-    Returns [app_label.model] unless the model has been swapped, in which case
-    returns the swappable setting value.
+    """Returns [app_label.model].
+
+    Returns [app_label.model] unless the model has been swapped, in which
+    case returns the swappable setting value.
     """
     return is_swapped(app_label, model) or join(app_label, model)
 
 
 def dependency(app_label, model, version=None):
-    """
+    """Returns a Django 1.7+ style dependency tuple
+
     Returns a Django 1.7+ style dependency tuple for inclusion in
     migration.dependencies[]
     """
@@ -56,16 +61,12 @@ def dependency(app_label, model, version=None):
 
 
 def get_model_names(app_label, models):
-    """
-    Map model names to their swapped equivalents for the given app
-    """
+    """Map model names to their swapped equivalents for the given app"""
     return dict((model, get_model_name(app_label, model)) for model in models)
 
 
 def load_model(app_label, model, required=True, require_ready=True):
-    """
-    Load the specified model class, or the class it was swapped out for.
-    """
+    """Load the specified model class, or the class it was swapped out for."""
     swapped = is_swapped(app_label, model)
     if swapped:
         app_label, model = split(swapped)
@@ -83,9 +84,7 @@ def load_model(app_label, model, required=True, require_ready=True):
 
 
 def set_app_prefix(app_label, prefix):
-    """
-    Set a custom prefix to use for the given app (e.g. WQ)
-    """
+    """Set a custom prefix to use for the given app (e.g. WQ)"""
     _prefixes[app_label] = prefix
 
 
