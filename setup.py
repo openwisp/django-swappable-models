@@ -45,6 +45,7 @@ setup(
         'Framework :: Django :: 3.2',
         'Framework :: Django :: 4.0',
         'Framework :: Django :: 4.2',
+        'Framework :: Django :: 5.0',
     ],
     tests_require=['django>=2.0'],
     test_suite='tests',
