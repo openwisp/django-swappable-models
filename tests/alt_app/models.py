@@ -7,4 +7,4 @@ class Type(BaseType):
     code = models.SlugField()
 
     class Meta:
-        app_label = 'alt_app'
+        app_label = "alt_app"

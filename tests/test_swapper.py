@@ -17,13 +17,13 @@ else:
 class SwapperTestCase(TestCase):
     # Tests that should work whether or not default_app.Type is swapped
     def test_fields(self):
-        Type = swapper.load_model('default_app', 'Type')
+        Type = swapper.load_model("default_app", "Type")
         fields = dict((field.name, field) for field in Type._meta.fields)
-        self.assertIn('name', fields)
+        self.assertIn("name", fields)
 
     def test_create(self):
-        Type = swapper.load_model('default_app', 'Type')
-        Item = swapper.load_model('default_app', 'Item')
+        Type = swapper.load_model("default_app", "Type")
+        Item = swapper.load_model("default_app", "Item")
 
         Item.objects.create(
             type=Type.objects.create(name="Type 1"),
@@ -42,12 +42,12 @@ class SwapperTestCase(TestCase):
             swapper.load_model("invalid_app", "Invalid", required=True)
 
     def test_non_contrib_app_split(self):
-        self.assertEqual(swapper.split('alt_app.Type'), ('alt_app', 'Type'))
+        self.assertEqual(swapper.split("alt_app.Type"), ("alt_app", "Type"))
 
     def test_contrib_app_split(self):
         self.assertEqual(
-            swapper.split('alt_app.contrib.named_things.NamedThing'),
-            ('alt_app.contrib.named_things', 'NamedThing'),
+            swapper.split("alt_app.contrib.named_things.NamedThing"),
+            ("alt_app.contrib.named_things", "NamedThing"),
         )
 
     # Tests that only work if default_app.Type is swapped
@@ -58,14 +58,14 @@ class SwapperTestCase(TestCase):
 
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
     def test_swap_fields(self):
-        Type = swapper.load_model('default_app', 'Type')
+        Type = swapper.load_model("default_app", "Type")
         fields = dict((field.name, field) for field in Type._meta.fields)
-        self.assertIn('code', fields)
+        self.assertIn("code", fields)
 
     @unittest.skipUnless(settings.SWAP, "requires swapped models")
     def test_swap_create(self):
-        Type = swapper.load_model('default_app', 'Type')
-        Item = swapper.load_model('default_app', 'Item')
+        Type = swapper.load_model("default_app", "Type")
+        Item = swapper.load_model("default_app", "Item")
 
         Item.objects.create(
             type=Type.objects.create(

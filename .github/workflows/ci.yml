@@ -23,25 +23,25 @@ jobs:
           - "3.13"
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
-      id: deps
-      run: |
-        pip install -U pip wheel setuptools
-        pip install tox tox-gh-actions
-        pip install openwisp-utils[qa]@https://github.com/openwisp/openwisp-utils/tarball/master
+      - name: Install dependencies
+        id: deps
+        run: |
+          pip install -U pip wheel setuptools
+          pip install tox tox-gh-actions
+          pip install openwisp-utils[qa]@https://github.com/openwisp/openwisp-utils/tarball/master
 
-    - name: QA checks
-      run: ./run-qa-checks
+      - name: QA checks
+        run: ./run-qa-checks
 
-    - name: Test
-      if: ${{ !cancelled() && steps.deps.conclusion == 'success' }}
-      run: tox
+      - name: Test
+        if: ${{ !cancelled() && steps.deps.conclusion == 'success' }}
+        run: tox
