@@ -8,16 +8,12 @@ Swapper is an unofficial API for the [undocumented] but very powerful Django
 feature: swappable models. Swapper facilitates implementing
 arbitrary swappable models in your own reusable apps.
 
+[![Build Status](https://github.com/openwisp/django-swappable-models/actions/workflows/ci.yml/badge.svg)](https://github.com/openwisp/django-swappable-models/actions/workflows/ci.yml)
 [![Latest PyPI Release](https://img.shields.io/pypi/v/swapper.svg)](https://pypi.org/project/swapper)
 [![Release Notes](https://img.shields.io/github/release/openwisp/django-swappable-models.svg)](https://github.com/wq/django-swappable-models/releases)
 [![License](https://img.shields.io/pypi/l/swapper.svg)](https://github.com/openwisp/django-swappable-models/blob/master/LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/openwisp/django-swappable-models.svg)](https://github.com/openwisp/django-swappable-models/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/openwisp/django-swappable-models.svg)](https://github.com/openwisp/django-swappable-models/network)
-[![GitHub Issues](https://img.shields.io/github/issues/openwisp/django-swappable-models.svg)](https://github.com/openwisp/django-swappable-models/issues)
-
-[![Build Status](https://github.com/openwisp/django-swappable-models/actions/workflows/ci.yml/badge.svg)](https://github.com/openwisp/django-swappable-models/actions/workflows/ci.yml)
-[![Python Support](https://img.shields.io/pypi/pyversions/swapper.svg)](https://pypi.org/project/swapper)
-[![Django Support](https://img.shields.io/pypi/djversions/swapper.svg)](https://pypi.org/project/swapper)
 
 ## Motivation
 
