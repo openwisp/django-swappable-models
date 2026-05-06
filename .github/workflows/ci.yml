@@ -37,7 +37,7 @@ jobs:
         run: |
           pip install -U pip wheel setuptools
           pip install tox tox-gh-actions
-          pip install openwisp-utils[qa]@https://github.com/openwisp/openwisp-utils/tarball/master
+          pip install openwisp-utils
 
       - name: QA checks
         run: ./run-qa-checks
