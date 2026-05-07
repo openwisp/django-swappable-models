@@ -1,0 +1,6 @@
+pip
+wheel
+setuptools
+tox
+tox-gh-actions
+openwisp-utils[qa]

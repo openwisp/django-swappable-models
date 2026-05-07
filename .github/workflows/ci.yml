@@ -35,9 +35,7 @@ jobs:
       - name: Install dependencies
         id: deps
         run: |
-          pip install -U pip wheel setuptools
-          pip install tox tox-gh-actions
-          pip install openwisp-utils[qa]@https://github.com/openwisp/openwisp-utils/tarball/master
+          pip install -U -r requirements-test.txt
 
       - name: QA checks
         run: ./run-qa-checks
