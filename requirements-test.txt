@@ -3,4 +3,4 @@ wheel
 setuptools
 tox
 tox-gh-actions
-openwisp-utils[qa]
+openwisp-utils[qa] @ https://github.com/openwisp/openwisp-utils/archive/refs/heads/master.tar.gz
