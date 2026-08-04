@@ -31,7 +31,7 @@ class Parent(models.Model):
 
 class Child(models.Model):
     name = models.TextField()
-    parent = models.ForeignKey(Parent)
+    parent = models.ForeignKey(Parent, on_delete=models.CASCADE)
 ```
 
 Suppose further that you want to allow the user to subclass either or both of
@@ -86,7 +86,9 @@ class Parent(BaseParent):
        swappable = swapper.swappable_setting('reusableapp', 'Parent')
 
 class BaseChild(models.Model):
-    parent = models.ForeignKey(swapper.get_model_name('reusableapp', 'Parent'))
+    parent = models.ForeignKey(
+        swapper.get_model_name('reusableapp', 'Parent'), on_delete=models.CASCADE
+    )
     # minimal base implementation ...
     class Meta:
         abstract = True
@@ -162,8 +164,8 @@ Swapper can also be used in migration scripts to facilitate dependency ordering 
           migrations.AddField(
               model_name='child',
               name='parent',
-<             field=models.ForeignKey(to=settings.REUSABLEAPP_PARENT_MODEL),
->             field=models.ForeignKey(to=swapper.get_model_name('reusableapp', 'Parent')),
+<             field=models.ForeignKey(to=settings.REUSABLEAPP_PARENT_MODEL, on_delete=models.CASCADE),
+>             field=models.ForeignKey(to=swapper.get_model_name('reusableapp', 'Parent'), on_delete=models.CASCADE),
               preserve_default=True,
           ),
       ]
