@@ -1,4 +1,6 @@
 *.pyc
+.venv
+env
 *.egg-info
 *.egg
 *.sw?
