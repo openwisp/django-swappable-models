@@ -15,6 +15,11 @@ arbitrary swappable models in your own reusable apps.
 [![GitHub Stars](https://img.shields.io/github/stars/openwisp/django-swappable-models.svg)](https://github.com/openwisp/django-swappable-models/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/openwisp/django-swappable-models.svg)](https://github.com/openwisp/django-swappable-models/network)
 
+## Requirements
+
+- Python 3.10 or later
+- Django 4.2 or later
+
 ## Motivation
 
 Suppose your reusable app has two related tables:
