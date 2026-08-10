@@ -56,6 +56,7 @@ If instructions conflict, repository config and CI workflows win first, docs nex
 - Before defining a new class, view, URL, REST endpoint, or test layout, inspect analogous implementations in related OpenWISP modules. Match their established names, URL names, API shape, and test organization unless the behavior requires a difference.
 - Cover both default and swapped-model apps when changing model resolution, dependency generation, or settings handling.
 - Be careful with import timing, circular imports, app labels, migration dependencies, and Django version compatibility.
+- Treat email addresses as case-insensitive when identifying, deduplicating, importing, migrating, or searching users by email. Use `email__iexact` for direct and `Q()` ORM lookups. Keep username matching case-sensitive unless explicitly required. Normalize email records this module owns to lowercase, and cover casing-only inputs, including legacy mixed-case records when relevant.
 
 ## Security Rules
 
