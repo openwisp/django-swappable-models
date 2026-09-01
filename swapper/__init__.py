@@ -1,7 +1,11 @@
+from importlib.metadata import version
+
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.db.migrations import swappable_dependency
+
+VERSION = version("swapper")
 
 _prefixes = {}
 
