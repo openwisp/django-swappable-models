@@ -1,6 +1,20 @@
 Changelog
 =========
 
+Version 1.5.0 [2026-09-01]
+--------------------------
+
+Changes
+~~~~~~~
+
+Dependencies
+++++++++++++
+
+- Added support for Django ``5.1`` and ``5.2``,
+- Added support for Python ``3.11``, ``3.12`` and ``3.13``.
+- Dropped support for Python < 3.9.
+- Dropped support for Django < 4.2.
+
 Version 1.4.0 [2024-08-14]
 --------------------------
 
