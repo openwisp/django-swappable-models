@@ -1,4 +1,5 @@
 import unittest
+from unittest import mock
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -16,6 +17,21 @@ else:
 
 class SwapperTestCase(TestCase):
     # Tests that should work whether or not default_app.Type is swapped
+    def test_version(self):
+        self.assertEqual(swapper.__version__, swapper.VERSION)
+        cases = [
+            ((1, 5, 0, "final"), "1.5"),
+            ((1, 5, 1, "final"), "1.5.1"),
+            ((1, 5, 0, "alpha"), "1.5a0"),
+            ((1, 5, 0, "alpha", 1), "1.5a1"),
+            ((1, 5, 0, "alpha", 0), "1.5 pre-alpha"),
+            ((1, 5, 0, "rc", 2), "1.5r2"),
+        ]
+        for version, expected in cases:
+            with self.subTest(version=version):
+                with mock.patch.object(swapper.version, "VERSION", version):
+                    self.assertEqual(swapper.get_version(), expected)
+
     def test_fields(self):
         Type = swapper.load_model("default_app", "Type")
         fields = dict((field.name, field) for field in Type._meta.fields)

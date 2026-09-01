@@ -1,0 +1,8 @@
+include LICENSE
+include README.md
+include CHANGES.rst
+recursive-include swapper *
+recursive-exclude * *.pyc
+recursive-exclude * *.swp
+recursive-exclude * __pycache__
+recursive-exclude tests *

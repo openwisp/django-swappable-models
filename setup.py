@@ -1,4 +1,12 @@
+import sys
+
 from setuptools import setup
+
+# avoid ImportError when Django is not installed yet
+sys.path.insert(0, "swapper")
+from version import get_version  # noqa
+
+sys.path.remove("swapper")
 
 LONG_DESCRIPTION = """
 The unofficial Django swappable models API.
@@ -15,8 +23,7 @@ def readme():
 
 setup(
     name="swapper",
-    use_scm_version=True,
-    setup_requires=["setuptools_scm"],
+    version=get_version(),
     author="S. Andrew Sheppard",
     author_email="andrew@wq.io",
     url="https://github.com/openwisp/django-swappable-models",
