@@ -3,16 +3,16 @@ on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
-permissions:
-  contents: read
-  issues: write
-  pull-requests: write
+permissions: {}
 concurrency:
   group: bot-autoassign-stale-pr-${{ github.repository }}
   cancel-in-progress: false
 jobs:
   manage-stale-prs-python:
-    uses: openwisp/openwisp-utils/.github/workflows/reusable-bot-autoassign.yml@master
+    if: github.repository == 'openwisp/django-swappable-models'
+    permissions:
+      contents: read
+    uses: openwisp/openwisp-actions/.github/workflows/reusable-bot-autoassign.yml@5072c81386b436b073b67bc7918cec647f9e3414 # 0.1.0
     with:
       bot_command: stale_pr
     secrets:
