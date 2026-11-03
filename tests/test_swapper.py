@@ -6,13 +6,6 @@ from django.test import TestCase
 
 import swapper
 
-try:
-    from django.db import migrations  # noqa
-except ImportError:
-    DJ17 = False
-else:
-    DJ17 = True
-
 
 class SwapperTestCase(TestCase):
     # Tests that should work whether or not default_app.Type is swapped
@@ -79,7 +72,7 @@ class SwapperTestCase(TestCase):
         item = Item.objects.all()[0]
         self.assertEqual(item.type.code, "type-1")
 
-    @unittest.skipUnless(settings.SWAP and DJ17, "requires swapped models & Django 1.7")
+    @unittest.skipUnless(settings.SWAP, "requires swapped models")
     def test_swap_dependency(self):
         self.assertEqual(
             swapper.dependency("default_app", "Type"), ("alt_app", "__first__")
@@ -101,9 +94,7 @@ class SwapperTestCase(TestCase):
             swapper.get_model_name("default_app", "Type"), "default_app.Type"
         )
 
-    @unittest.skipUnless(
-        not settings.SWAP and DJ17, "requires non-swapped models & Django 1.7"
-    )
+    @unittest.skipIf(settings.SWAP, "requires non-swapped models")
     def test_default_dependency(self):
         self.assertEqual(
             swapper.dependency("default_app", "Type"),

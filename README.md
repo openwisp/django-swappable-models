@@ -17,8 +17,8 @@ arbitrary swappable models in your own reusable apps.
 
 ## Requirements
 
-- Python 3.10 or later
-- Django 4.2 or later
+- Python 3.11 or later
+- Django 5.2 or later
 
 ## Motivation
 
