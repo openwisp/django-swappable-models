@@ -13,7 +13,7 @@ jobs:
       (github.event.action != 'closed' || github.event.pull_request.merged == false)
     permissions:
       contents: read
-    uses: openwisp/openwisp-actions/.github/workflows/reusable-bot-autoassign.yml@5072c81386b436b073b67bc7918cec647f9e3414 # 0.1.0
+    uses: openwisp/openwisp-actions/.github/workflows/reusable-bot-autoassign.yml@d6cc603701fe96a84115b060d34e8844a969cc41 # 0.3.0
     with:
       bot_command: issue_assignment
     secrets:
